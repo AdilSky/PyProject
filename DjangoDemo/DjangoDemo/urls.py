@@ -19,5 +19,9 @@ from django.contrib import admin
 from sign import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', views.index),
     url(r'^index/$',views.index),
+    url(r'^login_action/$',views.login_action),
+    url(r'^event_manage/$',views.event_manage),
+    url(r'^accounts/login/$',views.index),
 ]

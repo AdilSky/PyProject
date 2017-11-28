@@ -76,12 +76,32 @@ WSGI_APPLICATION = 'DjangoDemo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
+# MySQL
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    'default':{
+     'ENGINE':'django.db.backends.mysql',
+     'HOST':'127.0.0.1',
+     'PORT':'3306',
+     'NAME':'guest',
+     'USER':'Skyyj',
+     'PASSWORD':'Skyyj',
+     'OPTIONS':{
+         'init_command':"SET sql_mode='STRICT_TRANS_TABLES'"
+     },
     }
 }
+# mysql5.0以上版本支持三种sql_mode模式：ANSI、TRADITIONAL和STRICT_TRANS_TABLES。
+# ANSI模式：宽松模式，对插入数据进行校验，如果不符合定义类型或长度，对数据类型调整或截断保存，报warning警告。
+# TRADITIONAL模式：严格模式，当向mysql数据库插入数据时，进行数据的严格校验，保证错误数据不能插入，报error错误。用于事物时，会进行事物的回滚。
+# STRICT_TRANS_TABLES模式：严格模式，进行数据的严格校验，错误数据不能插入，报error错误。
+#
 
 
 # Password validation
