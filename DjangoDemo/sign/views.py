@@ -3,6 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 # Create your views here.
+from sign.models import Event
+
 
 def index(request):
 
@@ -40,7 +42,18 @@ def event_manage(request):
     # cookie
     #username = request.COOKIES.get('user','') # 读取cookie 默认为空
 
+    event_list = Event.objects.all()
+
     # session
     username = request.session.get('user','') # 读取浏览器session
 
-    return render(request,'event_manage.html',{'user':username})
+    return render(request,'event_manage.html',{'user':username,'events':event_list})
+
+@login_required
+def search_name(request):
+    '发布会名称搜索'
+
+    username = request.session.get('user','')
+    search_name = request.GET.get('name','')
+    event_list = Event.objects.filter(name__contains=search_name)
+    return render(request,'event_manage.html',{'user':username,'events':event_list})
